@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static ASCII Converter</title>
+    <script src="index.js"></script>
+    <style>
+        #drop_zone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed gray;
+            border-radius: 5px;
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <h1>Static ASCII Converter</h1>
+
+    <label for="image_input">Choose an image</label>
+    <br>
+    <input type="file" id="image_input" accept="image/*" required>
+    <div id="drop_zone">Drop files here</div>
+    
+    <br>
+
+    <label for="scale">Scaling factor (max 100%)</label>
+    <br>
+    <input type="number" id="scale" min="1" max="100" value="100" oninput="validateInput()">
+    <span id="scaleError" style="color: red;"></span>
+    
+    <br><br>
+
+    <button onclick="if(document.getElementById('image_input').files.length > 0) ascii_convert(); else alert('Please select an image.');">Convert</button>
+
+    <script>
+        function validateInput() {
+            var input = document.getElementById("scale");
+            var error = document.getElementById("scaleError");
+            var value = input.value;
+
+            if (value < 1 || value > 100 || !Number.isInteger(Number(value))) {
+                error.textContent = "Invalid input. Scaling factor must be an integer between 1 and 100.";
+            } else {
+                error.textContent = "";
+            }
+        }
+    </script>
+</body>
+</html>
